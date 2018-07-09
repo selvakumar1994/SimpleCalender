@@ -2,7 +2,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cog.calendar"
+    package="com.cogzidel.calendar"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>

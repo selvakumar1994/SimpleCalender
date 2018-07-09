@@ -7,11 +7,11 @@ android {
     buildToolsVersion "27.0.3"
 
     defaultConfig {
-        applicationId "com.cog.calendar"
+        applicationId "com.cogzidel.calendar"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 130
-        versionName "4.1.0"
+        versionCode 1
+        versionName "1.0.0"
         multiDexEnabled true
         setProperty("archivesBaseName", "calendar")
     }

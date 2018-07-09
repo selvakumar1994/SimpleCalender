@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.cog.calendar.views.MonthView
+<com.cogzidel.calendar.views.MonthView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/month_view"
     android:layout_width="match_parent"
