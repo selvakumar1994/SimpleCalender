@@ -7,50 +7,36 @@ android {
  compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
+def versionPropsFile = file('version.properties')
 
- def versionPropsFile = file('version.properties')
-    def versionBuild
+if (versionPropsFile.canRead()) {
+    def Properties versionProps = new Properties()
 
-    /*Setting default value for versionBuild which is the last incremented value stored in the file */
-    if (versionPropsFile.canRead()) {
-        def Properties versionProps = new Properties()
-        versionProps.load(new FileInputStream(versionPropsFile))
-        versionBuild = versionProps['VERSION_BUILD'].toInteger()
-    } else {
-        throw new FileNotFoundException("Could not read version.properties!")
-    }
+    versionProps.load(new FileInputStream(versionPropsFile))
 
+    def code = versionProps['VERSION_CODE'].toInteger() + 1
 
-    /*Wrapping inside a method avoids auto incrementing on every gradle task run. Now it runs only when we build apk*/
-    ext.autoIncrementBuildNumber = {
-
-        if (versionPropsFile.canRead()) {
-            def Properties versionProps = new Properties()
-            versionProps.load(new FileInputStream(versionPropsFile))
-            versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
-            versionProps['VERSION_BUILD'] = versionBuild.toString()
-            versionProps.store(versionPropsFile.newWriter(), null)
-        } else {
-            throw new FileNotFoundException("Could not read version.properties!")
-        }
-    }
-
-
-
-
-
-   
+    versionProps['VERSION_CODE']=code.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
 
     defaultConfig {
         applicationId "com.cogzidel.calendar"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 9
+        versionCode code
         versionName "1.0.9"
         multiDexEnabled true
         setProperty("archivesBaseName", "calendar")
     }
 
+}
+else {
+    throw new GradleException("Could not read version.properties!")
+}
+
+   
+
+   
     signingConfigs {
         release
     }
